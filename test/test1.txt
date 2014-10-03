@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- This Driver Specification file was created with API Builder -->
+<IDSpecification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Author="Liping" Company="String" Fax="String" Phone="String" Version="String" xsi:noNamespaceSchemaLocation="ID%20Specification.xsd">
+<Folder test1="val1">
+</Folder>
+</IDSpecification>

@@ -1,0 +1,36 @@
+<Parameter Access="RW" Extension="true" IDValue="" Identifier="Ring0" InputOutput="INPUT">
+  <DataObject NativeDescriptor="">
+    <DataType>
+      <Enumeration HasRangeTable="true" Identifier="" NumberOfMembers="2">
+        <MemberType>
+          <Numeric Predefined="1" Type="I32"/>
+        </MemberType>
+        <Member Identifier="A" Value="0.000000"/>
+        <Member Identifier="B" Value="1.000000"/>
+      </Enumeration>
+    </DataType>
+    <Control Class="Ring" DefaultValue="0" Label="Ring0"/>
+  </DataObject>
+<Description>
+Specifies ... Valid Values: 0 - A 1 - B Default Value:
+</Description>
+<Unit/>
+<RangeTable CustomInfo="" HasMax="true" HasMin="true" Type="IVI_VAL_DISCRETE">
+<Ranges>
+<DiscreteOrMinValue>0</DiscreteOrMinValue>
+<MaxValue/>
+<CorcedValue/>
+<CmdString>A</CmdString>
+<CmdValue>0</CmdValue>
+<Description/>
+</Ranges>
+<Ranges>
+<DiscreteOrMinValue>1</DiscreteOrMinValue>
+<MaxValue/>
+<CorcedValue/>
+<CmdString>B</CmdString>
+<CmdValue>0</CmdValue>
+<Description/>
+</Ranges>
+</RangeTable>
+</Parameter>
