@@ -62,7 +62,8 @@ public class SheetReader {
 		} 
 		
 		catch (FileNotFoundException e) {
-		    e.printStackTrace();
+		   System.out.println("File was not found, exiting program.");
+		   System.exit(-1);
 		} 
 		
 		catch (IOException e) {
