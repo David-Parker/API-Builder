@@ -1,16 +1,22 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class CompileError {
-	private static boolean forceContinue;
-	private static ArrayList<String> errors;
+	public static boolean forceContinue = false;
+	public static ArrayList<String> errors = new ArrayList<String>();
 	public static final int ERROR_1 = 0;
 	public static final int ERROR_2 = 1;
 	public static final int ERROR_3 = 2;
 
 	
 	public CompileError() {
-		forceContinue = false;
-		errors = new ArrayList<String>();
+		try {
+			System.setOut(new PrintStream(new File("log.txt")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void checkError(String type, int arg1, int arg2) {

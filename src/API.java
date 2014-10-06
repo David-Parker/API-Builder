@@ -1,13 +1,26 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
+import javax.swing.*;
 
 public class API {
 
 	public static void main(String[] args) {
-		SheetReader sr = new SheetReader();
-		String[][] data = sr.readSheet("test/test.xlsx");
-		SheetParser parser = new SheetParser();
-		Folder root = parser.parse(data, sr.getRows(), sr.getCols());
-		XMLWriter x = new XMLWriter("./spec.driver",root);
-		x.createXML();
-		System.out.println("Done.");
+		/* Open GUI Application */
+		SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                //Turn off metal's use of bold fonts
+                UIManager.put("swing.boldMetal", Boolean.FALSE); 
+                GUIApp.createAndShowGUI();
+            }
+        });
+		
+		try {
+			System.setOut(new PrintStream(new File("log.txt")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
+
 }
