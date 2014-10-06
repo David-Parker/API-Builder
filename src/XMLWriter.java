@@ -125,7 +125,7 @@ public class XMLWriter {
 		
 		catch(FileNotFoundException ex) {
 			/* Missing template.data file */
-			ce.checkError("File",CompileError.ERROR_1,0);
+			System.out.println("Could not find the template.data file in the data folder, no template Vis were created.");
 		}
 		
 		catch(IOException ex) {
