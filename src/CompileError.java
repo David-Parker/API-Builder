@@ -29,7 +29,7 @@ public class CompileError {
 			if(arg2 == ERROR_1)
 				message("Control found without a Vi at line " + arg1 + ".");
 			else if (arg2 == ERROR_2)
-				message("Invalid control name at line " + arg1 + ".");
+				message("Invalid control specification at line " + arg1 + ".");
 			else if (arg2 == ERROR_3)
 				message("Duplicate control name in the same Vi at line " + arg1 + ".");
 		}
@@ -61,6 +61,11 @@ public class CompileError {
 				message("The number of controls found exceeded the command's specifications at line " + arg1 + ".");
 			else if(arg2 == ERROR_3)
 				message("The number of controls found was less than the command's specifications at line " + arg1 + ".");
+		}
+		
+		else if(type.equals("Bool")) {
+			if(arg2 == ERROR_1)
+				message("A boolean control does not have the specified two values at line " + arg1 + ".");
 		}
 	}
 	

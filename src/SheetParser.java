@@ -88,6 +88,10 @@ public class SheetParser {
 					}
 					
 					if(data[i][j].charAt(data[i][j].length() - 1) == rightDelim) {
+						/* Check at the end of the folder if the last command has the right amount of controls */
+						if(Command.currCommand != null) 
+							Command.currCommand.checkNumControlsAbove(Command.currCommand.row);
+						
 						numDelims--;
 						/* Make sure that if there is an extra bracket, we don't go higher than the root level */
 						if(currFolder != root)
@@ -141,7 +145,7 @@ public class SheetParser {
 				currVi = newVi;
 				
 				if(Command.currCommand != null)
-					Command.currCommand.checkNumControlsAbove(row);
+					Command.currCommand.checkNumControlsAbove(Command.currCommand.row);
 				
 				Command.currCommand = null;
 				
@@ -219,7 +223,7 @@ public class SheetParser {
 			return null;
 		}
 		
-		StringTokenizer strTok = new StringTokenizer(control, ": ");
+		StringTokenizer strTok = new StringTokenizer(control, ":");
 		
 		while(strTok.hasMoreTokens()) {
 			if(count > 3) {
@@ -239,7 +243,6 @@ public class SheetParser {
 		}
 		
 		if(strs[2] == null || !isValidDataType(strs[2])) {
-			System.out.println("here");
 			ce.checkError("Control", row, CompileError.ERROR_2);
 			return null;
 		}
@@ -267,9 +270,9 @@ public class SheetParser {
 				newCommand = Command.currCommand;
 			}
 		}
-		else {
+		else {	
 			if(Command.currCommand != null)
-				Command.currCommand.checkNumControlsAbove(row);
+				Command.currCommand.checkNumControlsAbove(Command.currCommand.row);
 			
 			newCommand = new Command(command,row);
 			Command.currCommand = newCommand;
@@ -286,7 +289,7 @@ public class SheetParser {
 		case "String":
 			return new vString(strs[0],strs[1],strs[2],newCommand,row);
 		case "Bool":
-			return new vBool(strs[0],strs[1],strs[2],newCommand,row);
+			return new vBool(strs[0],strs[1],strs[2],newCommand,row,strs[3]);
 		case "Ring":
 			return new vRing(strs[0],strs[1],strs[2],newCommand,row,strs[3]);
 		default:

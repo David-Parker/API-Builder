@@ -5,16 +5,18 @@ public abstract class Control {
 	private String dataType;
 	private Command command;
 	protected String polCmd;
-	public final static String[] dataTypes = {"double","integer","int","string","boolean","bool","ring"};
-	public final static int NUM_DATA_TYPES = 7;
+	public final static String[] dataTypes = {"double","dbl","integer","int","string","boolean","bool","ring"};
+	public final static int NUM_DATA_TYPES = 8;
 	public int startOffset;
 	public int endOffset;
+	public int row;
 	
 	public Control(String type, String name, String dataType, Command command, int row) {
 		this.type = type;
 		this.name = name;
 		this.dataType = dataType;
 		this.command = command;
+		this.row = row;
 	}
 	
 	public String getName() {
@@ -54,7 +56,7 @@ public abstract class Control {
 			return "Int";
 		}
 		
-		else if(str.toLowerCase().equals("double")) {
+		else if(str.toLowerCase().equals("double") || str.toLowerCase().equals("dbl")) {
 			return "Double";
 		}
 		

@@ -167,18 +167,8 @@ public class XMLWriter {
 			}
 			
 			write(closeTag("Parameters"));
-			//write("<Parameters TotalNumber=\"0\"/>");
-			
-
-			/* TODO Continue After bug-fixes */
-			/* TODO Add command parsing here */
-			for(Control c: v.controls) {
-				//System.out.println(c.getCommand().getName());
-			}
 			
 			int numCommands = getNumberOfCommands(v);;
-			
-			//write("<Commands TotalNumber=\"0\"/>");
 			
 			al.clear();
 			al.add("TotalNumber","" + numCommands);
@@ -211,9 +201,6 @@ public class XMLWriter {
 					
 					write(closeTag("FormattedWrite"));
 					write(closeTag("Command"));
-					//System.out.println(curr.getName() + " = " + curr.getCommand().controlsFound);
-	
-					//System.out.println(curr.getName());
 				}
 			}
 	

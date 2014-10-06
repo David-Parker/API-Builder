@@ -19,7 +19,7 @@ public class SheetReader {
 		try {
 		    FileInputStream file = new FileInputStream(new File(filename));
 		  	XSSFWorkbook workbook = new XSSFWorkbook(file);
-		    XSSFSheet sheet = workbook.getSheetAt(1);
+		    XSSFSheet sheet = workbook.getSheetAt(0);
 		    Iterator<Row> rowIterator = sheet.iterator();
 		    rows = sheet.getLastRowNum() + 1;
 	        cols = ARBITRARY_COL_SIZE;

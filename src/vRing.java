@@ -51,7 +51,7 @@ public class vRing extends Control {
 	public ArrayList<String> parseRingEntries(String ringValue) {
 		ringValue = prepareValues(ringValue);
 		ArrayList<String> newEntries = new ArrayList<String>();
-		StringTokenizer strTok = new StringTokenizer(ringValue, "|,");
+		StringTokenizer strTok = new StringTokenizer(ringValue, "|, ");
 		
 		while(strTok.hasMoreTokens()) {
 			newEntries.add(strTok.nextToken());
