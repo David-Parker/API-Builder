@@ -13,7 +13,7 @@ public class CompileError {
 	
 	public CompileError() {
 		try {
-			System.setOut(new PrintStream(new File("log.txt")));
+			System.setOut(new PrintStream(new File("data/log.txt")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

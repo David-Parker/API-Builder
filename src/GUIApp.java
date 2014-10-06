@@ -8,9 +8,11 @@ import javax.swing.*;
 public class GUIApp extends JPanel implements ActionListener {
     static private final String newline = "\n";
     JButton openButton, compileButton;
+    JCheckBox templateButton;
     JTextArea log;
     JFileChooser fc;
     String path;
+    Boolean template = true;
  
     public GUIApp() {
         super(new BorderLayout());
@@ -27,10 +29,14 @@ public class GUIApp extends JPanel implements ActionListener {
  
         compileButton = new JButton("Compile File");
         compileButton.addActionListener(this);
+        
+        templateButton = new JCheckBox("Do Not Generate Template Vis");
+        templateButton.addActionListener(this);
 
         JPanel buttonPanel = new JPanel(); 
         buttonPanel.add(openButton);
         buttonPanel.add(compileButton);
+        buttonPanel.add(templateButton);
  
         add(buttonPanel, BorderLayout.PAGE_START);
         add(logScrollPane, BorderLayout.CENTER);
@@ -53,7 +59,9 @@ public class GUIApp extends JPanel implements ActionListener {
             log.setCaretPosition(log.getDocument().getLength());
  
         /* Handle save button action. */
-        } else if (e.getSource() == compileButton) {
+        } 
+        
+        else if (e.getSource() == compileButton) {
         	if(path != null) {
         		CompileError.forceContinue = true;
                 SheetReader sr = new SheetReader();
@@ -62,6 +70,7 @@ public class GUIApp extends JPanel implements ActionListener {
         		Folder root = parser.parse(data, sr.getRows(), sr.getCols());
         		
         		if(CompileError.errors.size() == 0) {
+        			XMLWriter.generateTemplate = template;
 	        		XMLWriter x = new XMLWriter("./spec.driver",root);
 	        		x.createXML();
 	        		System.out.println("Done, spec.driver was created in your API Builder directory." + newline);
@@ -79,6 +88,11 @@ public class GUIApp extends JPanel implements ActionListener {
         	
             log.setCaretPosition(log.getDocument().getLength());
         }
+        
+        else if(e.getSource() == templateButton) {
+        	template = !template;
+        }
+        
     }
  
     public static void createAndShowGUI() {
@@ -103,7 +117,7 @@ public class GUIApp extends JPanel implements ActionListener {
     public static String outputContents() {
     	String text = new String("");
     	try {
-			FileReader reader = new FileReader("log.txt");
+			FileReader reader = new FileReader("data/log.txt");
 			BufferedReader br = new BufferedReader(reader);
 			String line;
 			
