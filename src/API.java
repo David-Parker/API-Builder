@@ -2,10 +2,6 @@
 public class API {
 
 	public static void main(String[] args) {
-		for(int i = 0; i < args.length; i ++) {
-			System.out.println(args[i]);
-		}
-		
 		SheetReader sr = new SheetReader();
 		String[][] data = sr.readSheet("test/test.xlsx");
 		SheetParser parser = new SheetParser();
