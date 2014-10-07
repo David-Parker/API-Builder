@@ -17,7 +17,7 @@ public class GUIApp extends JPanel implements ActionListener {
     public GUIApp() {
         super(new BorderLayout());
  
-        log = new JTextArea(10,45);
+        log = new JTextArea(20,55);
         log.setMargin(new Insets(5,5,5,5));
         log.setEditable(false);
         JScrollPane logScrollPane = new JScrollPane(log);
@@ -83,7 +83,7 @@ public class GUIApp extends JPanel implements ActionListener {
         		log.append(outputContents() + newline);
         	}
         	else {
-        		log.append("No file selected.");
+        		log.append("No file selected." + newline);
         	}
         	
             log.setCaretPosition(log.getDocument().getLength());
