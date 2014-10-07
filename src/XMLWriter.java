@@ -116,7 +116,7 @@ public class XMLWriter {
 	
 	public static void writeTemplateFunctions() {
 		try {
-			FileReader reader = new FileReader("data/template.data");
+			FileReader reader = new FileReader("../data/template.data");
 			BufferedReader br = new BufferedReader(reader);
 			String line;
 			
