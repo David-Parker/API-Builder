@@ -21,9 +21,9 @@ public class API {
 		String[][] data = sr.readSheet(path);
 		SheetParser parser = new SheetParser();
 		Folder root = parser.parse(data, sr.getRows(), sr.getCols());
-		XMLWriter x = new XMLWriter("./spec.driver",root);
+		XMLWriter x = new XMLWriter("../spec.driver",root);
 		x.createXML();
-		System.out.println("Done.");
+		System.out.println("Done, spec.driver was created in your API Builder directory.");
 	}
 	
 	public static void usage() {
