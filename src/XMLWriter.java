@@ -34,6 +34,7 @@ public class XMLWriter {
 		writeFunctions();
 		writeCommands();
 		write(closeTag("IDSpecification"));
+		specFile.close();
 	}
 	
 	public static String createTag(String name, ArrayList<Attribute> att, String contents, boolean close) {
