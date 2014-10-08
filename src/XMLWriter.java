@@ -12,6 +12,7 @@ public class XMLWriter {
 	public static final boolean toConsole = false;
 	
 	public XMLWriter(String file, Folder fold) {
+		/* Comment Change Test */
 		root = fold;
 		ce = new CompileError();
 		
@@ -80,8 +81,10 @@ public class XMLWriter {
 		write(createTag("Prefix",null,inst.prefix,true));
 		write(createTag("Identifier",null,inst.identifier,true));
 		write(createTag("Technology",null,"LabVIEW PNP",true));
+		write(createTag("Manufacturer",null,"",true));
+		write("<InstrumentModels><InstrumentModel/></InstrumentModels><CommunicationInterface><IndustoryBus>USB</IndustoryBus></CommunicationInterface><ModelTested><InstrumentModel/></ModelTested><FirmwareTested>");
 		write(createTag("Manufacturer",null,inst.manufacturer,true));
-		write("<InstrumentModels><InstrumentModel/></InstrumentModels><CommunicationInterface><IndustoryBus>USB</IndustoryBus></CommunicationInterface><ModelTested><InstrumentModel/></ModelTested><FirmwareTested><Manufacturer/><InstrumentModel/><SerialNO/><BuildVersion/></FirmwareTested><InterfaceTested><IndustoryBus>USB</IndustoryBus></InterfaceTested>");
+		write("<InstrumentModel/><SerialNO/><BuildVersion/></FirmwareTested><InterfaceTested><IndustoryBus>USB</IndustoryBus></InterfaceTested>");
 	}
 	
 	public static void writeFolders(Folder fold) {
@@ -152,7 +155,7 @@ public class XMLWriter {
 			write(closeTag("Flag"));
 			
 			write(createTag("Path",null,v.getFolder().getPath(),true));
-			write(createTag("Description",null,"Specifies ... Valid Range: Min: Max: Default Value:",true));
+			write(createTag("Description",null,"",true));
 			write(createTag("ErrorQuery",null,"false",true));
 			write(createTag("ManualUpdate",null,"false",true));
 			write(createTag("BlockDiagramComments",null,"",true));
@@ -264,7 +267,7 @@ public class XMLWriter {
 		writeControlDataType(c,al);
 		
 		write(closeTag("DataObject"));
-		write(createTag("Description",null,"",true));
+		write(createTag("Description",null,"Specifies ... Valid Range:\n Default Value:\n ",true));
 		write(createTag("Unit",null,"",true));
 		
 		/* Booleans need a range table */
