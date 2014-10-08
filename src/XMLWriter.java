@@ -267,7 +267,7 @@ public class XMLWriter {
 		writeControlDataType(c,al);
 		
 		write(closeTag("DataObject"));
-		write(createTag("Description",null,"Specifies ... Valid Range:\nDefault Value:\n ",true));
+		write(createTag("Description",null,"Specifies ...\n\nValid Range:\n\nDefault Value:\n ",true));
 		write(createTag("Unit",null,"",true));
 		
 		/* Booleans need a range table */
