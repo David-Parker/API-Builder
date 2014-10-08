@@ -6,7 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
  
 public class GUIApp extends JPanel implements ActionListener {
-    static private final String newline = "\n";
+	private static final long serialVersionUID = 3395388270674327150L;
+	static private final String newline = "\n";
     JButton openButton, compileButton;
     JCheckBox templateButton;
     JTextArea log;
