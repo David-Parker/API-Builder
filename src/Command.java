@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Command {
 	private String name;
 	private int numControls;
+	private static final char space = ' ';
 	public int controlsFound;
 	public static Command currCommand;
 	public int row;
@@ -59,8 +60,10 @@ public class Command {
 		for(int i = 0; i < name.length(); i++) {
 			if(name.charAt(i) == ' ')
 				break;
+			
 			if(shortSCPI) {
-				if(isParseCharacter(name.charAt(i)));
+				if(isParseCharacter(name.charAt(i)))
+
 					formCmd += name.charAt(i);
 			}
 			else {
@@ -78,6 +81,10 @@ public class Command {
 		String polCmd = new String("");
 		
 		for(int i = 0; i < name.length(); i++) {
+
+			if(name.charAt(i) == ' ')
+				break;
+
 			if(isParseCharacter(name.charAt(i))) {
 				polCmd += name.charAt(i);
 			}
