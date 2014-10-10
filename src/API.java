@@ -1,19 +1,20 @@
 
 public class API {
+	private static String[] commands = {"-t","-s"};
 
 	public static void main(String[] args) {
 		
-		if(args.length < 1 || args.length > 2)
+		if(args.length < 1)
 			usage();
 		
 		String path = args[0];
 		
-		if(args.length == 2) {
-			if(args[1].equals("-t")) {
-				XMLWriter.generateTemplate = false;
-			}
-			else {
-				usage();
+		if(args.length >= 2) {
+			for(int i = 1; i < args.length; i++) {
+				if(isCommandAndIssueRequest(args[i]));
+				else {
+					usage();
+				}
 			}
 		}
 		
@@ -29,5 +30,21 @@ public class API {
 	public static void usage() {
 		System.out.println("[Usage]: path/to/apibuilder.jar path/to/file.xlsx [-t]");
 		System.exit(0);
+	}
+	
+	public static boolean isCommandAndIssueRequest(String s) {
+		for(int i = 0; i < commands.length; i++) {
+			if(s.equals(commands[i])) {
+				if(s.equals("-t")) {
+					XMLWriter.generateTemplate = false;
+					return true;
+				}
+				else if(s.equals("-s")) {
+					Command.shortSCPI = true;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
