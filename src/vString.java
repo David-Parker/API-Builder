@@ -3,7 +3,7 @@ public class vString extends Control{
 	
 	public vString(String type, String name, String dataType, Command command, int row) {
 		super(type, name, "String", command, row);
-		polCmd = "{<VAL>}";
+		polCmd = " {<VAL>}";
 	}
 
 	public void writeTag() {
