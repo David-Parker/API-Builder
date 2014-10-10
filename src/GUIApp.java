@@ -9,11 +9,12 @@ public class GUIApp extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 3395388270674327150L;
 	static private final String newline = "\n";
     JButton openButton, compileButton;
-    JCheckBox templateButton;
+    JCheckBox templateButton, shortSCPIButton;
     JTextArea log;
     JFileChooser fc;
     String path;
     Boolean template = true;
+    Boolean shortSCPI = false;
  
     public GUIApp() {
         super(new BorderLayout());
@@ -33,11 +34,15 @@ public class GUIApp extends JPanel implements ActionListener {
         
         templateButton = new JCheckBox("Do Not Generate Template Vis");
         templateButton.addActionListener(this);
+        
+        shortSCPIButton = new JCheckBox("Format With Short SCPI");
+        shortSCPIButton.addActionListener(this);
 
         JPanel buttonPanel = new JPanel(); 
         buttonPanel.add(openButton);
         buttonPanel.add(compileButton);
         buttonPanel.add(templateButton);
+        buttonPanel.add(shortSCPIButton);
  
         add(buttonPanel, BorderLayout.PAGE_START);
         add(logScrollPane, BorderLayout.CENTER);
@@ -72,6 +77,7 @@ public class GUIApp extends JPanel implements ActionListener {
         		
         		if(CompileError.errors.size() == 0) {
         			XMLWriter.generateTemplate = template;
+        			Command.shortSCPI = shortSCPI;
 	        		XMLWriter x = new XMLWriter("./spec.driver",root);
 	        		x.createXML();
 	        		System.out.println("Done, spec.driver was created in your API Builder directory." + newline);
@@ -92,6 +98,10 @@ public class GUIApp extends JPanel implements ActionListener {
         
         else if(e.getSource() == templateButton) {
         	template = !template;
+        }
+        
+        else if(e.getSource() == shortSCPIButton) {
+        	shortSCPI = !shortSCPI;
         }
         
     }
