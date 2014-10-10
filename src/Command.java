@@ -4,10 +4,13 @@ import java.util.ArrayList;
 public class Command {
 	private String name;
 	private int numControls;
+	private static final char space = ' ';
 	public int controlsFound;
 	public static Command currCommand;
 	public int row;
 	public String polishedCommand;
+	public static boolean shortSCPI = false;
+	
 	
 	public Command(String name, int row) {
 		/* Check if the user specified a multi-control command */
@@ -59,7 +62,13 @@ public class Command {
 			if(name.charAt(i) == ' ')
 				break;
 			
+			if(shortSCPI) {
+				if(isParseCharacter(name.charAt(i)))
+					formCmd += name.charAt(i);
+			}
+			else {
 				formCmd += name.charAt(i);
+			}
 		}
 		
 		for(Control c: controls) {
@@ -72,7 +81,10 @@ public class Command {
 		String polCmd = new String("");
 		
 		for(int i = 0; i < name.length(); i++) {
-			if(isParseChracter(name.charAt(i))) {
+			if(name.charAt(i) == ' ')
+				break;
+			
+			if(isParseCharacter(name.charAt(i))) {
 				polCmd += name.charAt(i);
 			}
 		}
@@ -95,7 +107,7 @@ public class Command {
 		return polCmd;
 	}
 	
-	public static boolean isParseChracter(char c) {
+	public static boolean isParseCharacter(char c) {
 		char[] delims = {':','(',')'};
 		for(char ch: delims) {
 			if(c == ch || Character.isUpperCase(c))
