@@ -67,6 +67,11 @@ public class CompileError {
 			if(arg2 == ERROR_1)
 				message("A boolean control does not have the specified two values at line " + arg1 + ".");
 		}
+		
+		else if(type.equals("Character")) {
+			if(arg2 == ERROR_1)
+				message("A non-ASCII character was found at line " + arg1 + ".");
+		}
 	}
 	
 	public void checkError(String type, int arg1, String str) {
