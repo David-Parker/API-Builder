@@ -7,6 +7,7 @@ import javax.swing.*;
  
 public class GUIApp extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 3395388270674327150L;
+	private static final String appVersion = "API Builder v1.0";
 	static private final String newline = "\n";
     JButton openButton, compileButton;
     JCheckBox templateButton, shortSCPIButton;
@@ -107,7 +108,7 @@ public class GUIApp extends JPanel implements ActionListener {
     }
  
     public static void createAndShowGUI() {
-        JFrame frame = new JFrame("API Builder");
+        JFrame frame = new JFrame(appVersion);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         frame.add(new GUIApp());
