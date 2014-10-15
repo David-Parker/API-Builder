@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 
 public class SheetParser {
 	public static final char leftDelim = '{';
@@ -26,7 +28,7 @@ public class SheetParser {
 	}
 	
 	public Folder parse(String[][] data, int rows, int cols) {
-		parseInstrumentData(data,rows,cols);
+		preProcess(data,rows,cols);
 		parseFolders(data,rows,cols);
 		
 		/* The API must enforce the Utility folder for the Template Vis */
@@ -37,11 +39,19 @@ public class SheetParser {
 		return root;
 	}
 	
-	public static void parseInstrumentData(String[][] data, int rows, int cols) {
+	/* The purpose of the preprocessor is to make sure the basic formatting is correct */
+	public static void preProcess(String[][] data, int rows, int cols) {
 		Instrument inst = Instrument.getInstance();
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
-				if(data[i][j] != null) {
+				if(data[i][j] != null && !isComment(data[i][j])) {
+					
+					/* Make sure there are no non-ASCII characters */
+					CharsetEncoder asciiEncoder = Charset.forName("US-ASCII").newEncoder();
+					if(!asciiEncoder.canEncode(data[i][j])) {
+						ce.checkError("Character", i + 1, CompileError.ERROR_1);
+					}
+					
 					if(data[i][j].length() > 7 && data[i][j].substring(0,7).toLowerCase().equals("prefix:")) {
 						inst.prefix = parseRecord(data[i][j]);
 					}
