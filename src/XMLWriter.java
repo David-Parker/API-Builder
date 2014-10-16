@@ -12,7 +12,6 @@ public class XMLWriter {
 	public static final boolean toConsole = false;
 	
 	public XMLWriter(String file, Folder fold) {
-		/* Comment Change Test */
 		root = fold;
 		ce = new CompileError();
 		
@@ -156,7 +155,7 @@ public class XMLWriter {
 			
 			write(createTag("Path",null,v.getFolder().getPath(),true));
 			write(createTag("Description",null,"",true));
-			write(createTag("ErrorQuery",null,"false",true));
+			write(createTag("ErrorQuery",null,"true",true));
 			write(createTag("ManualUpdate",null,"false",true));
 			write(createTag("BlockDiagramComments",null,"",true));
 			
