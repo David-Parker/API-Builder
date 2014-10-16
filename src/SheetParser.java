@@ -195,8 +195,7 @@ public class SheetParser {
 				command = command.replaceAll("<","&lt;");
 				command = command.replaceAll(">","&gt;");
 				
-				/* The default type for a none control is a double */
-				Control cont = new vDouble("none","","",(new Command(command,row)), row);
+				Control cont = new vNone("none","","",(new Command(command,row)), row);
 				currVi.controls.add(cont);
 			}
 			
@@ -265,6 +264,14 @@ public class SheetParser {
 		
 		/* Convert data types to their 3 letter Driver acronym */
 		strs[2] = Control.fixDataTypes(strs[2]);
+		
+		/* Outputs cannot have commands */
+		if(strs[0].equals("OUTPUT")) {
+			if(!command.equals("")) {
+				ce.checkError("Control", row, CompileError.ERROR_4);
+				return null;
+			}
+		}
 		
 		/* If this is a multi-line command, grab the current command's name */
 		Command newCommand = null;

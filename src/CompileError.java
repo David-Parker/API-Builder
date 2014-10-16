@@ -6,6 +6,7 @@ public class CompileError {
 	public static final int ERROR_1 = 0;
 	public static final int ERROR_2 = 1;
 	public static final int ERROR_3 = 2;
+	public static final int ERROR_4 = 3;
 
 	
 	public CompileError() {
@@ -32,6 +33,8 @@ public class CompileError {
 				message("Invalid control specification at line " + arg1 + ".");
 			else if (arg2 == ERROR_3)
 				message("Duplicate control name in the same Vi at line " + arg1 + ".");
+			else if (arg2 == ERROR_4)
+				message("Outputs cannot have commands attached to them at line " + arg1 + ".");
 		}
 		
 		else if(type.equals("Folder")) {

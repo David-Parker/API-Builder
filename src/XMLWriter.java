@@ -12,7 +12,6 @@ public class XMLWriter {
 	public static final boolean toConsole = false;
 	
 	public XMLWriter(String file, Folder fold) {
-		/* Comment Change Test */
 		root = fold;
 		ce = new CompileError();
 		
