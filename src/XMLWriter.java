@@ -1,3 +1,9 @@
+/********************************************************************************************************
+ * Note that this class is very ad hoc.
+ * It was designed to output XML code in the format that is explicitly specified by the IDDS XML Schema.
+ * Changes made to this format or the schema may require rewrites of this class.
+ ********************************************************************************************************/
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +18,6 @@ public class XMLWriter {
 	public static final boolean toConsole = false;
 	
 	public XMLWriter(String file, Folder fold) {
-		/* Comment Change Test */
 		root = fold;
 		ce = new CompileError();
 		
@@ -38,6 +43,7 @@ public class XMLWriter {
 		specFile.close();
 	}
 	
+	/* Bread and butter method of the XMLWriter, allows for creating XML tags quickly and in a less erroneous way then hand-writing each one */
 	public static String createTag(String name, ArrayList<Attribute> att, String contents, boolean close) {
 		String formatted = "<" + name;
 		
@@ -178,8 +184,10 @@ public class XMLWriter {
 			al.add("TotalNumber","" + numCommands);
 			write(createTag("Commands",al.attributes,"",false));
 			
+			/* Iterate through all of the controls */
 			for(Iterator<Control> i = v.controls.iterator(); i.hasNext();) {
 				Control curr = i.next();
+				/* Iterate through the sibling controls of this control, IE the multi-line controls */
 				if(!curr.getCommand().getName().equals("")) {
 					Control multiLineControl = curr;
 					ArrayList<Control> controls = getMultiLineControls(v, curr);

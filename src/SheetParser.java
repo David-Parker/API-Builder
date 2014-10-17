@@ -27,6 +27,7 @@ public class SheetParser {
 		allVis = new ArrayList<Vi>();
 	}
 	
+	/* Entry method for this class, returns the root folder when done so that the XML Writer can output its information to XML */
 	public Folder parse(String[][] data, int rows, int cols) {
 		preProcess(data,rows,cols);
 		parseFolders(data,rows,cols);
@@ -67,6 +68,7 @@ public class SheetParser {
 				}
 			}
 		}
+		/* Check if not all the instrument information was found */
 		ce.checkError("Instrument",0,0);
 	}
 	
@@ -78,6 +80,7 @@ public class SheetParser {
 					/* Read the formatting */
 					if(isComment(data[i][j]) || isKeyword(data[i][j])) continue;
 					
+					/* Found a new folder, create it and add its parent as the currFolder */
 					if(data[i][j].charAt(0) == leftDelim) {
 						String name = parseFolderName(data[i][j]);
 						
@@ -86,6 +89,8 @@ public class SheetParser {
 							name = "Utility";
 						
 						Folder newFolder = new Folder(name,currFolder,i,currFolder.getPath() + "\\" + name);
+						
+						/* No blank folder names allowed */
 						if(newFolder.getName().equals("")) {
 							ce.checkError("Folder",i + 1,CompileError.ERROR_1);
 						}
@@ -97,13 +102,14 @@ public class SheetParser {
 						numDelims++;
 					}
 					
+					/* We are closing the current folder */
 					if(data[i][j].charAt(data[i][j].length() - 1) == rightDelim) {
 						/* Check at the end of the folder if the last command has the right amount of controls */
 						if(Command.currCommand != null) 
 							Command.currCommand.checkNumControlsAbove(Command.currCommand.row);
 						
 						numDelims--;
-						/* Make sure that if there is an extra bracket, we don't go higher than the root level */
+						/* Make sure that if there is an extra closing bracket, we don't go higher than the root level */
 						if(currFolder != root)
 							currFolder = currFolder.parent;
 					}
@@ -123,6 +129,7 @@ public class SheetParser {
 			}
 		}
 		
+		/* Check if the number of left and right delimiters found are equal */
 		ce.checkError("Delim", numDelims, currFolder.row + 1);
 		if(DEBUG && ce.numErrors() == 0)
 			CompileError.printFolders(root,0);
@@ -148,6 +155,7 @@ public class SheetParser {
 		if(!name.equals(multiLine) && 
 		   !(name.length() >= 3 && name.substring(0,3).toLowerCase().equals("in:")) &&
 		   !(name.length() >= 4 && name.substring(0,4).toLowerCase().equals("out:"))) {
+			/* Make sure this is a new unique Vi name */
 				checkViName(name,row);
 				Vi newVi = new Vi(name);
 				newVi.setFolder(currFolder);
@@ -167,7 +175,6 @@ public class SheetParser {
 				
 				/* List of all implemented Vis so we don't duplicate them */
 				allVis.add(newVi);
-	
 		}
 		
 		/* New Control, add it to currVi */
@@ -187,19 +194,21 @@ public class SheetParser {
 				currVi.controls.add(cont);
 			}
 			
+			/* The user specified this control as none */
 			else if(control.toLowerCase().equals("none")) {
 				if(command.equals(multiLine)) {
 					ce.checkError("Command", row, CompileError.ERROR_1);
 				}
 				
+				/* XML Can't have < and > in names */
 				command = command.replaceAll("<","&lt;");
 				command = command.replaceAll(">","&gt;");
 				
-				/* The default type for a none control is a double */
-				Control cont = new vDouble("none","","",(new Command(command,row)), row);
+				Control cont = new vNone("none","","",(new Command(command,row)), row);
 				currVi.controls.add(cont);
 			}
 			
+			/* Controls cannot be blank if a command was found */
 			else if(!control.equals("")) {
 				ce.checkError("Control", row, CompileError.ERROR_2);
 			}
@@ -235,6 +244,7 @@ public class SheetParser {
 		
 		StringTokenizer strTok = new StringTokenizer(control, ":");
 		
+		/* Traverse the control on the delimiters tokenized by a : */
 		while(strTok.hasMoreTokens()) {
 			if(count > 3) {
 				ce.checkError("Control", row, CompileError.ERROR_2);
@@ -265,6 +275,14 @@ public class SheetParser {
 		
 		/* Convert data types to their 3 letter Driver acronym */
 		strs[2] = Control.fixDataTypes(strs[2]);
+		
+		/* Outputs cannot have commands */
+		if(strs[0].equals("OUTPUT")) {
+			if(!command.equals("")) {
+				ce.checkError("Control", row, CompileError.ERROR_4);
+				return null;
+			}
+		}
 		
 		/* If this is a multi-line command, grab the current command's name */
 		Command newCommand = null;
