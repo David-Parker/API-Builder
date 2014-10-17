@@ -24,8 +24,7 @@ public class Command {
 	}
 	
 	public int findNumControls() {
-		/* TODO Temp function */
-		
+		/* Method returns the number of controls the user must specify for this command */
 		if(name.equals("")) return 1;
 		
 		int spaceCount = 0;
@@ -38,29 +37,29 @@ public class Command {
 	}
 	
 	public void checkNumControlsBelow(int row) {
-		//System.out.println(controlsFound + " " + numControls );
+		/* The number of controls from findNumControls was below the number actually specified by the user */
 		if(controlsFound > numControls) {
-			//System.out.println("Below");
 			CompileError ce = new CompileError();
 			ce.checkError("Command", row, CompileError.ERROR_2);
 		}
 	}
 	
 	public void checkNumControlsAbove(int row) {
-		//System.out.println(controlsFound + " " + numControls );
+		/* The number of controls from findNumControls was above the number actually specified by the user */
 		if(controlsFound < numControls) {
-			//System.out.println("Above");
 			CompileError ce = new CompileError();
 			ce.checkError("Command", row, CompileError.ERROR_3);
 		}
 	}
 	
 	public String getFormattedCommand(ArrayList<Control> controls) {
+		/* Command formatted in the IDDS specified way */
 		String formCmd = "";
 		for(int i = 0; i < name.length(); i++) {
 			if(name.charAt(i) == ' ')
 				break;
 			
+			/* Use the Short SCPI version of this command, not the whole command */
 			if(shortSCPI) {
 				if(isParseCharacter(name.charAt(i)))
 
@@ -78,6 +77,7 @@ public class Command {
 	}
 	
 	public String getPolishedCommand(ArrayList<Control> controls) {
+		/* Similar to getFormattedCommand, but always formats in the short SCPI format */
 		String polCmd = new String("");
 		
 		for(int i = 0; i < name.length(); i++) {
@@ -99,7 +99,6 @@ public class Command {
 			c.endOffset = endOffset;
 
 			startOffset = endOffset + 2;
-			//System.out.println("Start:  " + startOffset + " End: " + endOffset);
 		}
 		
 		polCmd = polCmd.replaceAll("<","&lt;");
