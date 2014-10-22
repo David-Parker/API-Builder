@@ -47,6 +47,10 @@ public abstract class Control {
 		
 	}
 	
+	public String getDescription() {
+		return "Specifies ...\n\nValid Range:\n\nDefault Value:\n ";
+	}
+	
 	/* Each type of control will write out its own tag */
 	public abstract void writeTag();
 	public abstract String formatter();
