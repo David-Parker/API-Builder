@@ -9,6 +9,18 @@ public class vBool extends Control{
 		entries = parseRingEntries(boolValue,row);
 		polCmd = createRingCmd();
 	}
+	
+	public String getDescription() {
+		/* Booleans should have two distinct values */
+		if(entries.size() != 2)
+			return super.getDescription();
+		
+		String description = new String("Specifies ...\n\n" + "Valid Values:\n");
+		
+		description += "T: Enable\nF: Disable\n\nDefault Value:\nT: Enable"; 
+		
+		return description;
+	}
 
 	public void writeTag() {
 		AttributeList al = new AttributeList();
