@@ -185,7 +185,7 @@ public class SheetParser {
 			   (control.length() >= 4 && control.substring(0,4).toLowerCase().equals("out:"))) {
 				Control cont = parseControl(control, command, row);
 				
-				if(cont == null)
+				if(cont == null) 
 					return;
 				
 				/* Check if a control with this name already exists for this Vi */
@@ -211,6 +211,11 @@ public class SheetParser {
 			/* Controls cannot be blank if a command was found */
 			else if(!control.equals("")) {
 				ce.checkError("Control", row, CompileError.ERROR_2);
+			}
+			
+			/* We found a control before finding it's corresponding Vi */
+			else {
+				ce.checkError("Control", row, CompileError.ERROR_1);
 			}
 		}
 		

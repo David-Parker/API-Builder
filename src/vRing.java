@@ -9,6 +9,22 @@ public class vRing extends Control {
 		entries = parseRingEntries(ringValue);
 		polCmd = createRingCmd();
 	}
+	
+	public String getDescription() {
+		/* Empty Ring control, just use the default description */
+		if(entries.size() < 1)
+			return super.getDescription();
+		
+		String description = new String("Specifies ...\n\n" + "Valid Values:\n");
+		
+		for(int i = 0; i < entries.size(); i++) {
+			description += i + ": " + entries.get(i) + '\n';
+		}
+		
+		description += "\nDefault Value:\n" + "0: " + entries.get(0);
+		
+		return description;
+	}
 
 	public void writeTag() {
 		AttributeList al = new AttributeList();
