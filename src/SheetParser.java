@@ -177,6 +177,12 @@ public class SheetParser {
 				allVis.add(newVi);
 		}
 		
+		/* We found a control before finding it's corresponding Vi */
+		else {
+			if(!name.equals(multiLine))
+				ce.checkError("Control", row, CompileError.ERROR_1);
+		}
+		
 		/* New Control, add it to currVi */
 		if(currVi != null) {
 			
@@ -212,16 +218,6 @@ public class SheetParser {
 			else if(!control.equals("")) {
 				ce.checkError("Control", row, CompileError.ERROR_2);
 			}
-			
-			/* We found a control before finding it's corresponding Vi */
-			else {
-				ce.checkError("Control", row, CompileError.ERROR_1);
-			}
-		}
-		
-		/* We found a control before finding it's corresponding Vi */
-		else {
-			ce.checkError("Control", row, CompileError.ERROR_1);
 		}
 	}
 	
@@ -340,7 +336,7 @@ public class SheetParser {
 	
 	public static void checkViName(String name, int row) {
 		for(Vi v: allVis) {
-			if(name.equals(v.getName())) {
+			if(name.toLowerCase().equals(v.getName().toLowerCase())) {
 				ce.checkError("Vi", row, 0);
 			}
 		}
