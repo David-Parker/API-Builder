@@ -1,7 +1,7 @@
 
 public abstract class Control {
 	private String type;
-	private String name;
+	protected String name;
 	private String dataType;
 	private Command command;
 	protected String polCmd;

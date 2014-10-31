@@ -15,7 +15,17 @@ public class vRing extends Control {
 		if(entries.size() < 1)
 			return super.getDescription();
 		
-		String description = new String("Specifies ...\n\n" + "Valid Values:\n");
+		String description = new String("The " + name + " control selects the value ");
+		
+		for(int i = 0; i < entries.size(); i++) {
+			description += entries.get(i);
+			if(i == entries.size() - 2)
+				description += " or ";
+			else if(i != entries.size() - 1)
+				description += ",";
+		}
+		
+		description += ".\n\n" + "Valid Values:\n";
 		
 		for(int i = 0; i < entries.size(); i++) {
 			description += i + ": " + entries.get(i) + '\n';
