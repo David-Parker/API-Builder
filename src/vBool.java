@@ -15,7 +15,7 @@ public class vBool extends Control{
 		if(entries.size() != 2)
 			return super.getDescription();
 		
-		String description = new String("Specifies ...\n\n" + "Valid Values:\n");
+		String description = new String("Enables or Disables the " + name + " control.\n\n" + "Valid Values:\n");
 		
 		description += "T: Enable\nF: Disable\n\nDefault Value:\nT: Enable"; 
 		
