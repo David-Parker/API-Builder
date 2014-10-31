@@ -5,6 +5,14 @@ public class vInteger extends Control {
 		super(type, name, "I32", command, row);
 		polCmd = " {<VAL>}";
 	}
+	
+	public String getDescription() {
+		String description = new String("The " + name + " control specifies a user defined integer value.\n\n" + "Valid Values:\n\n");
+		
+		description += "Default Value:\n0"; 
+		
+		return description;
+	}
 
 	public void writeTag() {
 		AttributeList al = new AttributeList();
