@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Command {
 	private String name;
 	private int numControls;
-	private static final char space = ' ';
 	public int controlsFound;
 	public static Command currCommand;
 	public int row;
