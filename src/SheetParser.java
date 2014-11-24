@@ -3,6 +3,7 @@ import java.util.StringTokenizer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
+/* Parse the whole excel spreadsheet, setting up all the data structures and return the root of the tree */
 public class SheetParser {
 	public static final char leftDelim = '{';
 	public static final char rightDelim = '}';
@@ -73,6 +74,7 @@ public class SheetParser {
 	}
 	
 	@SuppressWarnings("unused")
+	/* Parse the API and set up the folder structure */
 	public static void parseFolders(String[][] data, int rows, int cols) {
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
