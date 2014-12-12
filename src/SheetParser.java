@@ -1,9 +1,13 @@
+/********************************************************************************************************
+* Parse the whole excel spreadsheet, setting up all the data structures and return the root of the tree
+* from the parse() method.
+*********************************************************************************************************/
+
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
-/* Parse the whole excel spreadsheet, setting up all the data structures and return the root of the tree */
 public class SheetParser {
 	public static final char leftDelim = '{';
 	public static final char rightDelim = '}';
